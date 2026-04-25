@@ -78,6 +78,7 @@ button {
 
 /* 4. HEADER / NAVBAR */
 .site-header {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -189,9 +190,6 @@ button {
   background: #fff;
   border-bottom: 1px solid #e6e9ef;
   padding: 8px 0;
-  position: sticky;
-  top: 0;
-  z-index: 1250;
 }
 
 .top-bar-inner {
@@ -751,6 +749,7 @@ footer {
 
   /* 2.  taller navbar for thumbs */
   .site-header {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1200;
@@ -1016,6 +1015,7 @@ footer {
 
   /* 5.  search bar stays below header (already sticky) */
   .search-wrap {
+    position: -webkit-sticky;
     position: sticky;
     top: 64px;
     z-index: 1190;
