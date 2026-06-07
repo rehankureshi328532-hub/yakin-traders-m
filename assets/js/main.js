@@ -381,39 +381,53 @@
 
   // Handle Quote Form Submit
   if (quoteForm) {
-    quoteForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(quoteForm);
-      if (quoteFeedback) quoteFeedback.textContent = 'Sending...';
+  quoteForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      try {
-        const res = await fetch(quoteForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
+    const data = {
+      name: quoteForm.name.value,
+      mobile: quoteForm.mobile.value,
+      product: quoteForm.product.value,
+      quantity: quoteForm.quantity.value,
+      message: quoteForm.message.value
+    };
 
-        if (res.ok) {
-          if (quoteFeedback) quoteFeedback.textContent = 'Thanks — enquiry sent. We will call you shortly.';
-          alert("✅ Request sent successfully! Our team will contact you soon.");
-          quoteForm.reset();
+    if (quoteFeedback) {
+      quoteFeedback.textContent = "Sending...";
+    }
 
-          // Optional: WhatsApp Fallback
-          setTimeout(() => {
-            const phone = '917878311313';
-            const msg = encodeURIComponent('Hi, I requested a quote. Please call me.');
-            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank', 'noopener');
-          }, 1000);
-        } else {
-          if (quoteFeedback) quoteFeedback.textContent = 'Unable to send. Please call us.';
-          alert("❌ Something went wrong. Please try again.");
+    try {
+
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbzkEV2I9zYYpWc2AAx9vA6HhFYv67ZG6G7dQAE9ta_3x-QMOx-VDs_VmZKBBSrCgPdW/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
         }
-      } catch (err) {
-        if (quoteFeedback) quoteFeedback.textContent = 'Network error — please call us.';
-        alert("❌ Network error. Please try again.");
+      );
+
+      if (quoteFeedback) {
+        quoteFeedback.textContent =
+          "✅ Request Submitted Successfully!";
       }
-    });
-  }
+
+      quoteForm.reset();
+
+    } catch (err) {
+
+      console.error(err);
+
+      if (quoteFeedback) {
+        quoteFeedback.textContent =
+          "❌ Unable to submit request.";
+      }
+    }
+  });
+}
 
   // 2. EXPOSE GLOBALS (Required for inline onclick HTML)
   window.changeImage = function (el) {

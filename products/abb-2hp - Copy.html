@@ -280,7 +280,7 @@
     <section id="quickQuote" class="quick-quote">
       <h2>Request Best Price</h2>
       <p>Fill this form and our sales team will call you within 15 minutes.</p>
-      <form id="quoteForm" action="https://formspree.io/f/your-form-id" method="POST" class="quote-form">
+      <form id="quoteForm" class="quote-form">
         <label>
           <span>&rsaquo;</span>
           <input type="text" name="name" required>
@@ -343,7 +343,45 @@
 
   <button id="quickQuoteBtn" class="floating-quote" aria-label="Quick Quote">&#9889; Quick Quote</button>
 
-  <script src="../assets/js/main.js" defer></script></body>
+  <script src="../assets/js/main.js" defer></script>
+  <script>
+document.getElementById("quoteForm")
+.addEventListener("submit", async function(e){
+
+  e.preventDefault();
+
+  const form = e.target;
+
+  const data = {
+    name: form.name.value,
+    mobile: form.mobile.value,
+    product: form.product.value,
+    quantity: form.quantity.value,
+    message: form.message.value
+  };
+
+  try {
+
+    await fetch("https://script.google.com/macros/s/AKfycbzkEV2I9zYYpWc2AAx9vA6HhFYv67ZG6G7dQAE9ta_3x-QMOx-VDs_VmZKBBSrCgPdW/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById("quoteFeedback").innerHTML =
+      "✅ Request Submitted Successfully";
+
+    form.reset();
+
+  } catch(error) {
+
+    document.getElementById("quoteFeedback").innerHTML =
+      "❌ Error submitting form";
+
+  }
+
+});
+</script>
+</body>
 </html>
 
 
