@@ -1,4 +1,4 @@
-﻿
+
 /* main.js â€” Clean, single-file JS for your site */
 
 /* eslint-disable no-unused-vars */
@@ -308,8 +308,8 @@
       e.preventDefault();
       const formData = new FormData(cForm);
       fetch(cForm.action, { method: "POST", body: formData })
-        .then(() => { alert("âœ… Your inquiry has been sent successfully!"); cForm.reset(); })
-        .catch(() => { alert("âŒ Something went wrong. Please try again."); });
+        .then(() => { alert("✅ Your inquiry has been sent successfully!"); cForm.reset(); })
+        .catch(() => { alert("❌ Something went wrong. Please try again."); });
     });
   }
 
@@ -384,7 +384,7 @@
     quoteForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(quoteForm);
-      if (quoteFeedback) quoteFeedback.textContent = 'Sendingâ€¦';
+      if (quoteFeedback) quoteFeedback.textContent = 'Sending...';
 
       try {
         const res = await fetch(quoteForm.action, {
@@ -394,8 +394,8 @@
         });
 
         if (res.ok) {
-          if (quoteFeedback) quoteFeedback.textContent = 'Thanks â€” enquiry sent. We will call you shortly.';
-          alert("âœ… Request sent successfully! Our team will contact you soon.");
+          if (quoteFeedback) quoteFeedback.textContent = 'Thanks — enquiry sent. We will call you shortly.';
+          alert("✅ Request sent successfully! Our team will contact you soon.");
           quoteForm.reset();
 
           // Optional: WhatsApp Fallback
@@ -406,11 +406,11 @@
           }, 1000);
         } else {
           if (quoteFeedback) quoteFeedback.textContent = 'Unable to send. Please call us.';
-          alert("âŒ Something went wrong. Please try again.");
+          alert("❌ Something went wrong. Please try again.");
         }
       } catch (err) {
-        if (quoteFeedback) quoteFeedback.textContent = 'Network error â€” please call us.';
-        alert("âŒ Network error. Please try again.");
+        if (quoteFeedback) quoteFeedback.textContent = 'Network error — please call us.';
+        alert("❌ Network error. Please try again.");
       }
     });
   }
